@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="online.weiyin.mapper.StudentsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="online.weiyin.entity.Students">
+        <id column="student_id" property="studentId" />
+        <result column="student_unique_id" property="studentUniqueId" />
+        <result column="student_name" property="studentName" />
+        <result column="birthdate" property="birthdate" />
+        <result column="contact_email" property="contactEmail" />
+        <result column="contact_phone" property="contactPhone" />
+        <result column="gender" property="gender" />
+        <result column="parents" property="parents" />
+        <result column="grade" property="grade" />
+    </resultMap>
+
+</mapper>
