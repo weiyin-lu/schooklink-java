@@ -14,8 +14,11 @@ public enum ResultCode {
 //    通用码
     SUCCESS(200, "成功"),
     NOT_FOUND(404,"未找到资源"),
-    ERROR(500,"服务器错误");
+    ERROR(500,"服务器错误"),
 //    自定义码
+    LOGIN_FAIL(1001, "登录失败，账号或密码错误"),
+    LOGIN_OUT(1002, "未登录或登录已过期"),
+    ;
 
     private Integer code;
     private String msg;

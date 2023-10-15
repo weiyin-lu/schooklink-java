@@ -30,10 +30,6 @@ public class Users implements Serializable {
     @TableId(value = "user_id", type = IdType.AUTO)
     private Integer userId;
 
-    @ApiModelProperty("业务角度唯一性ID")
-    @TableField("user_unique_id")
-    private String userUniqueId;
-
     @ApiModelProperty("用户名")
     @TableField("username")
     private String username;

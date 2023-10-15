@@ -5,7 +5,6 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="online.weiyin.entity.Users">
         <id column="user_id" property="userId" />
-        <result column="user_unique_id" property="userUniqueId" />
         <result column="username" property="username" />
         <result column="password" property="password" />
         <result column="user_type" property="userType" />

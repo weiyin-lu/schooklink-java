@@ -21,7 +21,7 @@ import java.util.List;
  * @since 2023-10-14
  */
 @RestController
-@RequestMapping("/weiyin/dictionary")
+@RequestMapping("/schoollink/dictionary")
 public class DictionaryController {
 
     @Autowired
