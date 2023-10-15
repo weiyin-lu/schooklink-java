@@ -3,7 +3,6 @@ package online.weiyin.controller;
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.service.IService;
 import online.weiyin.common.Result;
 import online.weiyin.common.ResultCode;
 import online.weiyin.dto.LoginDTO;
@@ -20,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -62,7 +60,7 @@ public class UsersController {
                 return Result.success(StpUtil.getTokenValue());
             }
             else {
-                return Result.fail(ResultCode.LOGIN_FAIL);
+                return Result.fail(ResultCode.LOGIN_ERROR1);
             }
     }
 
@@ -73,6 +71,10 @@ public class UsersController {
         users.setUserType(registerDTO.getUserType());
         users.setPassword(registerDTO.getPassword());
         users.setUsername(registerDTO.getUsername());
+
+        if(registerDTO.getUserType() == null) {
+            return Result.fail(ResultCode.REG_ERROR3);
+        }
 
         switch(registerDTO.getUserType()) {
             case "1":
@@ -137,7 +139,7 @@ public class UsersController {
                     QueryWrapper<Students> wrapper3 = new QueryWrapper<Students>()
                             .eq("students_unique_id",StpUtil.getLoginId());
                     return Result.success(studentsService.getOne(wrapper3));
-                default: return Result.fail(ResultCode.LOGIN_OUT_ERROR);
+                default: return Result.fail(ResultCode.LOGIN_ERROR2);
             }
     }
 
@@ -163,7 +165,7 @@ public class UsersController {
             return Result.success();
         }
         else {
-            return Result.fail(ResultCode.LOGIN_OUT_ERROR);
+            return Result.fail(ResultCode.LOGIN_ERROR2);
         }
     }
 
