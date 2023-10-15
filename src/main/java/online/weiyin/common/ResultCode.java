@@ -17,7 +17,7 @@ public enum ResultCode {
     ERROR(500,"服务器错误"),
 //    自定义码
     LOGIN_FAIL(1001, "登录失败，账号或密码错误"),
-    LOGIN_OUT(1002, "未登录或登录已过期"),
+    LOGIN_OUT_ERROR(1002, "未登录或登录已过期"),
     ;
 
     private Integer code;
