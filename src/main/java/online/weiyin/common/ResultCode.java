@@ -18,6 +18,9 @@ public enum ResultCode {
 //    自定义码
     LOGIN_FAIL(1001, "登录失败，账号或密码错误"),
     LOGIN_OUT_ERROR(1002, "未登录或登录已过期"),
+    REG_ERROR1(1003, "注册失败，账号已存在"),
+
+    REG_ERROR2(1004, "无效角色"),
     ;
 
     private Integer code;

@@ -3,9 +3,11 @@ package online.weiyin.controller;
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.IService;
 import online.weiyin.common.Result;
 import online.weiyin.common.ResultCode;
 import online.weiyin.dto.LoginDTO;
+import online.weiyin.dto.RegisterDTO;
 import online.weiyin.entity.Parents;
 import online.weiyin.entity.Students;
 import online.weiyin.entity.Teachers;
@@ -15,8 +17,10 @@ import online.weiyin.service.StudentsService;
 import online.weiyin.service.TeachersService;
 import online.weiyin.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -60,6 +64,53 @@ public class UsersController {
             else {
                 return Result.fail(ResultCode.LOGIN_FAIL);
             }
+    }
+
+    @PostMapping("/register")
+    @Transactional
+    public Result register(@RequestBody RegisterDTO registerDTO) {
+        Users users = new Users();
+        users.setUserType(registerDTO.getUserType());
+        users.setPassword(registerDTO.getPassword());
+        users.setUsername(registerDTO.getUsername());
+
+        switch(registerDTO.getUserType()) {
+            case "1":
+                Teachers teachers = new Teachers();
+                teachers.setTeacherUniqueId(registerDTO.getUsername());
+                teachers.setTeacherName(registerDTO.getName());
+                teachers.setContactPhone(registerDTO.getPhone());
+                teachers.setGender("3");
+                teachers.setGrade("000000");
+
+                usersService.save(users);
+                teachersService.save(teachers);
+                break;
+            case "2":
+                Parents parents = new Parents();
+                parents.setParentUniqueId(registerDTO.getUsername());
+                parents.setParentName(registerDTO.getName());
+                parents.setContactPhone(registerDTO.getPhone());
+                parents.setGender("3");
+
+                usersService.save(users);
+                parentsService.save(parents);
+                break;
+            case "3":
+                Students students = new Students();
+                students.setStudentUniqueId(registerDTO.getUsername());
+                students.setStudentName(registerDTO.getName());
+                students.setGender("3");
+                students.setGrade("000000");
+
+                usersService.save(users);
+                studentsService.save(students);
+                break;
+            default:
+                return Result.fail(ResultCode.REG_ERROR2);
+        }
+        return Result.success();
+
     }
 
     /**

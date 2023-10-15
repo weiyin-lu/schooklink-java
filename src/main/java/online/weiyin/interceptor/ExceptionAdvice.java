@@ -3,6 +3,7 @@ package online.weiyin.interceptor;
 import cn.dev33.satoken.exception.NotLoginException;
 import online.weiyin.common.Result;
 import online.weiyin.common.ResultCode;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -19,12 +20,16 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class ExceptionAdvice {
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    @ExceptionHandler(Exception.class)
+    @ExceptionHandler
     public Result<Object> exceptionHandler(Exception e){
         if(e instanceof NotLoginException) {
             return Result.fail(ResultCode.LOGIN_OUT_ERROR);
+        } else if(e instanceof DuplicateKeyException) {
+            e.printStackTrace();
+            return Result.fail(ResultCode.REG_ERROR1);
         } else {
-            return Result.success();
+            e.printStackTrace();
+            return Result.fail(ResultCode.ERROR);
         }
     }
 }

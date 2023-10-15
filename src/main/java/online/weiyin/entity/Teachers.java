@@ -46,6 +46,10 @@ public class Teachers implements Serializable {
     @TableField("contact_email")
     private String contactEmail;
 
+    @ApiModelProperty("教师联系电话")
+    @TableField("contact_phone")
+    private String contactPhone;
+
     @ApiModelProperty("所在班级编码")
     @TableField("grade")
     private String grade;
