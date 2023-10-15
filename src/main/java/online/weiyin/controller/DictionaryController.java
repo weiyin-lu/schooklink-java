@@ -1,6 +1,7 @@
 package online.weiyin.controller;
 
 import cn.hutool.json.JSONUtil;
+import online.weiyin.common.Result;
 import online.weiyin.entity.Dictionary;
 import online.weiyin.service.DictionaryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,8 @@ public class DictionaryController {
 
     @GetMapping("/hello")
     @ResponseBody
-    public String hello() {
+    public Result hello() {
         List<Dictionary> list = dictionaryService.list();
-        return JSONUtil.toJsonPrettyStr(list);
+        return Result.success(list);
     }
 }
