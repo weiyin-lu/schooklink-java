@@ -24,13 +24,20 @@ public class ExceptionAdvice {
     @ExceptionHandler
     public Result<Object> exceptionHandler(Exception e){
         if(e instanceof NotLoginException) {
+//            拦截所有未登录信息
             return Result.fail(ResultCode.LOGIN_ERROR2);
         } else if(e instanceof DuplicateKeyException) {
+//            online.weiyin.controller.UsersController.register
+//            拦截username重复
             e.printStackTrace();
             return Result.fail(ResultCode.REG_ERROR1);
         } else if(e instanceof DataIntegrityViolationException) {
+//            online.weiyin.controller.UsersController.register
+//            online.weiyin.controller.DictionaryController.addCode
+//            拦截非空字段
             return Result.fail(ResultCode.REG_ERROR3);
         } else {
+//            通用拦截其他所有未处理异常
             e.printStackTrace();
             return Result.fail(ResultCode.ERROR);
         }

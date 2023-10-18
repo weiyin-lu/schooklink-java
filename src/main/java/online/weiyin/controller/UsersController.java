@@ -64,24 +64,31 @@ public class UsersController {
             }
     }
 
+    /**
+     * 注册方法
+     * @param registerDTO 注册dto
+     * @return 注册成功或失败信息（受全局异常拦截控制）
+     */
     @PostMapping("/register")
     @Transactional
     public Result register(@RequestBody RegisterDTO registerDTO) {
+//        构造users对象
         Users users = new Users();
         users.setUserType(registerDTO.getUserType());
         users.setPassword(registerDTO.getPassword());
         users.setUsername(registerDTO.getUsername());
-
+//        检查userType是否为空（避免空指针）
         if(registerDTO.getUserType() == null) {
             return Result.fail(ResultCode.REG_ERROR3);
         }
-
+//        根据角色类型访问不同数据表插入
         switch(registerDTO.getUserType()) {
             case "1":
                 Teachers teachers = new Teachers();
                 teachers.setTeacherUniqueId(registerDTO.getUsername());
                 teachers.setTeacherName(registerDTO.getName());
                 teachers.setContactPhone(registerDTO.getPhone());
+//                默认值，参考码表
                 teachers.setGender("3");
                 teachers.setGrade("000000");
 
@@ -93,6 +100,7 @@ public class UsersController {
                 parents.setParentUniqueId(registerDTO.getUsername());
                 parents.setParentName(registerDTO.getName());
                 parents.setContactPhone(registerDTO.getPhone());
+//                默认值，参考码表
                 parents.setGender("3");
 
                 usersService.save(users);
@@ -102,6 +110,7 @@ public class UsersController {
                 Students students = new Students();
                 students.setStudentUniqueId(registerDTO.getUsername());
                 students.setStudentName(registerDTO.getName());
+//                默认值，参考码表
                 students.setGender("3");
                 students.setGrade("000000");
 
@@ -117,7 +126,7 @@ public class UsersController {
 
     /**
      * 根据角色获得当前用户的信息
-     * @return
+     * @return 用户信息（受全局异常拦截控制）
      */
     @SaCheckLogin
     @GetMapping("/getInfo")

@@ -15,4 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/schoollink/students")
 public class StudentsController {
 
+
+
 }
