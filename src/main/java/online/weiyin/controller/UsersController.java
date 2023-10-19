@@ -23,7 +23,7 @@ import java.util.List;
 
 /**
  * <p>
- *  控制器-用户认证相关
+ *  用户认证和鉴权
  * </p>
  *
  * @author 卢子昂

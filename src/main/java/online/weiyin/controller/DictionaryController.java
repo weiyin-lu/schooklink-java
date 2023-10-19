@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器
+ *  值域管理
  * </p>
  *
  * @author 卢子昂
