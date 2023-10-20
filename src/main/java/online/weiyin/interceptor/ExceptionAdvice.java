@@ -34,8 +34,8 @@ public class ExceptionAdvice {
         } else if(e instanceof DataIntegrityViolationException) {
 //            online.weiyin.controller.UsersController.register
 //            online.weiyin.controller.DictionaryController.addCode
-//            拦截非空字段
-            return Result.fail(ResultCode.REG_ERROR3);
+//            拦截非空字段为空的情况，一般在使用插入的情况下触发
+            return Result.fail(ResultCode.INSERT_ERROR2);
         } else {
 //            通用拦截其他所有未处理异常
             e.printStackTrace();

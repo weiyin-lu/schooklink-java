@@ -77,9 +77,9 @@ public class UsersController {
         users.setUserType(registerDTO.getUserType());
         users.setPassword(registerDTO.getPassword());
         users.setUsername(registerDTO.getUsername());
-//        检查userType是否为空（避免空指针）
+//        检查userType是否为空（避免switch参数空指针）
         if(registerDTO.getUserType() == null) {
-            return Result.fail(ResultCode.REG_ERROR3);
+            return Result.fail(ResultCode.INSERT_ERROR2);
         }
 //        根据角色类型访问不同数据表插入
         switch(registerDTO.getUserType()) {

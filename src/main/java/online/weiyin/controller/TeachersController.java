@@ -8,10 +8,7 @@ import online.weiyin.common.ResultCode;
 import online.weiyin.entity.Teachers;
 import online.weiyin.service.TeachersService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -51,6 +48,24 @@ public class TeachersController {
         QueryWrapper<Teachers> wrapper = new QueryWrapper<Teachers>()
                 .eq("teacher_unique_id", id);
         Teachers one = teachersService.getOne(wrapper);
-        return Result.success(wrapper);
+        return Result.success(one);
+    }
+
+    /**
+     * 更新特定教师的信息
+     * @param teachers
+     * @return
+     */
+    @PostMapping("/updateTeachers")
+    @SaCheckLogin
+    public Result updateInfo(@RequestBody Teachers teachers) {
+        QueryWrapper<Teachers> wrapper = new QueryWrapper<Teachers>()
+                .eq("teacher_unique_id", teachers.getTeacherUniqueId());
+        boolean update = teachersService.update(teachers, wrapper);
+        if(update) {
+            return Result.success();
+        } else {
+            return Result.fail(ResultCode.UPDATE_ERROR1);
+        }
     }
 }

@@ -47,7 +47,7 @@ public class DictionaryController {
     }
 
     /**
-     * 向特定码表插入新值（shou）
+     * 向特定码表插入新值（可能受全局异常拦截控制）
      * @param codeDTO 码表type、key、value
      * @return 成功或失败信息（受全局异常拦截控制）
      */
