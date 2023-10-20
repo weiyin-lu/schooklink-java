@@ -39,7 +39,7 @@ public class TeachersController {
 
     /**
      * 管理功能-获取某个id的教师信息
-     * @param id
+     * @param id 业务角度唯一性id
      * @return
      */
     @GetMapping("/getTeachersByUnique/{id}")
@@ -53,15 +53,15 @@ public class TeachersController {
 
     /**
      * 更新特定教师的信息
-     * @param teachers
+     * @param teacher
      * @return
      */
-    @PostMapping("/updateTeachers")
+    @PostMapping("/updateTeacher")
     @SaCheckLogin
-    public Result updateInfo(@RequestBody Teachers teachers) {
+    public Result updateInfo(@RequestBody Teachers teacher) {
         QueryWrapper<Teachers> wrapper = new QueryWrapper<Teachers>()
-                .eq("teacher_unique_id", teachers.getTeacherUniqueId());
-        boolean update = teachersService.update(teachers, wrapper);
+                .eq("teacher_unique_id", teacher.getTeacherUniqueId());
+        boolean update = teachersService.update(teacher, wrapper);
         if(update) {
             return Result.success();
         } else {

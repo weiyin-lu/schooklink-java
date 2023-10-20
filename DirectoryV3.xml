@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <trees>
+     <tree path="/src/main/java/online/weiyin/common" title="结果集和返回值码表"/>
+     <tree path="/src/main/java/online/weiyin/config" title="配置"/>
+     <tree path="/src/main/java/online/weiyin/controller" title="控制器"/>
+     <tree path="/src/main/java/online/weiyin/dto" title="数据传输对象"/>
+     <tree path="/src/main/java/online/weiyin/entity" title="实体类"/>
+     <tree path="/src/main/java/online/weiyin/interceptor" title="过滤器和全局异常拦截"/>
+     <tree path="/src/main/java/online/weiyin/mapper" title="映射"/>
+     <tree path="/src/main/java/online/weiyin/service" title="服务"/>
+     <tree path="/src/main/java/online/weiyin/util" title="工具类" />
+     <tree path="/src/main/resources/db/migration" title="数据库文件"/>
+ </trees>
