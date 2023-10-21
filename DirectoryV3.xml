@@ -10,4 +10,5 @@
      <tree path="/src/main/java/online/weiyin/service" title="服务"/>
      <tree path="/src/main/java/online/weiyin/util" title="工具类" />
      <tree path="/src/main/resources/db/migration" title="数据库文件"/>
+     <tree path="/src/main/resources/logback" title="logback多环境配置"/>
  </trees>

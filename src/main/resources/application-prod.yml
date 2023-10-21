@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    password: root
+    username: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/schoollink?&useSSL=false&serverTimezone=UTC
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  flyway:
+    enabled: false
+sa-token:
+  token-name: schoollink
+  timeout: 43200
+  active-timeout: 3600
+  # 是否允许同一账号多地同时登录 （为 true 时允许一起登录, 为 false 时新登录挤掉旧登录）
+  is-concurrent: false
+  is-share: true
+  token-style: uuid
+  is-log: false
+logging:
+  config: classpath:logback/logback-prod.xml
+springfox:
+  documentation:
+    swagger-ui:
+      enabled: false

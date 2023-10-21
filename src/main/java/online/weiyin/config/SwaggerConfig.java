@@ -17,6 +17,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @Time 2023/10/14 下午 04:30
  * @Author 卢子昂
  */
+
 @Configuration
 public class SwaggerConfig {
     @Bean

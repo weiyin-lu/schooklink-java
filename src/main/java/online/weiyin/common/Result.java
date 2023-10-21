@@ -1,5 +1,7 @@
 package online.weiyin.common;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,10 +16,14 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@ApiModel(value = "业务结果集", description = "用于业务接口返回")
 public class Result<T> {
 //    对象列表
+    @ApiModelProperty("编码，除http标准编码外包含自定义码")
     private Integer code;
+    @ApiModelProperty("消息，具有良好交互的返回信息")
     private String msg;
+    @ApiModelProperty("数据，携带返回值的接口会有此信息")
     T data;
 //    构造方法
     private Result() {
