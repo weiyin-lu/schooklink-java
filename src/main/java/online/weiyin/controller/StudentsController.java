@@ -55,13 +55,13 @@ public class StudentsController {
     }
 
     /**
-     * 更新特定教师的信息
+     * 更新特定学生的信息
      * @param student
      * @return
      */
     @PostMapping("/updateStudent")
     @SaCheckLogin
-    public Result updateInfo(@RequestBody Students student) {
+    public Result updateStudent(@RequestBody Students student) {
         QueryWrapper<Students> wrapper = new QueryWrapper<Students>()
                 .eq("student_unique_id", student.getStudentUniqueId());
         boolean update = studentsService.update(student, wrapper);

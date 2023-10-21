@@ -58,7 +58,7 @@ public class TeachersController {
      */
     @PostMapping("/updateTeacher")
     @SaCheckLogin
-    public Result updateInfo(@RequestBody Teachers teacher) {
+    public Result updateTeacher(@RequestBody Teachers teacher) {
         QueryWrapper<Teachers> wrapper = new QueryWrapper<Teachers>()
                 .eq("teacher_unique_id", teacher.getTeacherUniqueId());
         boolean update = teachersService.update(teacher, wrapper);
