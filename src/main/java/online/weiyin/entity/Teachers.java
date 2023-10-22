@@ -54,5 +54,8 @@ public class Teachers implements Serializable {
     @TableField("grade")
     private String grade;
 
+    @ApiModelProperty("逻辑删除标识")
+    @TableField("is_delete")
+    private Integer isDelete;
 
 }

@@ -5,10 +5,13 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import online.weiyin.common.Result;
 import online.weiyin.common.ResultCode;
+import online.weiyin.dto.TeacherInfo;
 import online.weiyin.entity.Teachers;
 import online.weiyin.service.TeachersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -29,12 +32,11 @@ public class TeachersController {
      * 管理功能-教师列表(分页)
      * @return
      */
-    @GetMapping("/getTeachersList/{page}")
+    @GetMapping("/getTeachersList")
     @SaCheckLogin
-    public Result getTeachersList(@PathVariable Integer page) {
-        Page<Teachers> pageIns = new Page<>(page, 10);
-        Page<Teachers> pageResult = teachersService.page(pageIns);
-        return Result.success(pageResult);
+    public Result getTeachersList() {
+        List<Teachers> list = teachersService.list();
+        return Result.success(list);
     }
 
     /**
@@ -52,16 +54,23 @@ public class TeachersController {
     }
 
     /**
-     * 更新特定教师的信息
-     * @param teacher
+     * 更新教师的个人信息（性别、联系邮箱、联系电话）
+     * @param info
      * @return
      */
     @PostMapping("/updateTeacher")
     @SaCheckLogin
-    public Result updateTeacher(@RequestBody Teachers teacher) {
+    public Result updateTeacher(@RequestBody TeacherInfo info) {
+//        构造查询条件
         QueryWrapper<Teachers> wrapper = new QueryWrapper<Teachers>()
-                .eq("teacher_unique_id", teacher.getTeacherUniqueId());
-        boolean update = teachersService.update(teacher, wrapper);
+                .eq("teacher_unique_id", info.getTeacherUniqueId());
+//        构造更新对象
+        Teachers teachers = new Teachers();
+        teachers.setGender(info.getGender());
+        teachers.setContactPhone(info.getContactPhone());
+        teachers.setContactEmail(info.getContactEmail());
+//        执行更新
+        boolean update = teachersService.update(teachers, wrapper);
         if(update) {
             return Result.success();
         } else {

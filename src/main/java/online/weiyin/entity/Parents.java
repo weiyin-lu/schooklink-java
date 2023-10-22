@@ -50,5 +50,9 @@ public class Parents implements Serializable {
     @TableField("contact_phone")
     private String contactPhone;
 
+    @ApiModelProperty("逻辑删除标识")
+    @TableField("is_delete")
+    private Integer isDelete;
+
 
 }

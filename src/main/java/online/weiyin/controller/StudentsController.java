@@ -5,12 +5,15 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import online.weiyin.common.Result;
 import online.weiyin.common.ResultCode;
+import online.weiyin.dto.StudentInfo;
 import online.weiyin.entity.Students;
 import online.weiyin.entity.Teachers;
 import online.weiyin.service.StudentsService;
 import online.weiyin.service.TeachersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -27,17 +30,16 @@ public class StudentsController {
     StudentsService studentsService;
 
     /**
-     * 管理功能-按照班级查找学生列表(分页)
+     * 管理功能-按照班级查找学生列表
      * @return
      */
-    @GetMapping("/getStudentsList/{grade}/{page}")
+    @GetMapping("/getStudentsList/{grade}")
     @SaCheckLogin
-    public Result getStudentsList(@PathVariable String grade, @PathVariable Integer page) {
+    public Result getStudentsList(@PathVariable String grade) {
         QueryWrapper<Students> wrapper = new QueryWrapper<Students>()
                 .eq("grade",grade);
-        Page<Students> pageIns = new Page<>(page, 10);
-        Page<Students> pageResult = studentsService.page(pageIns,wrapper);
-        return Result.success(pageResult);
+        List<Students> list = studentsService.list(wrapper);
+        return Result.success(list);
     }
 
     /**
@@ -55,16 +57,24 @@ public class StudentsController {
     }
 
     /**
-     * 更新特定学生的信息
-     * @param student
+     * 更新特定学生的个人信息（生日、邮箱、手机号、性别）
+     * @param info
      * @return
      */
     @PostMapping("/updateStudent")
     @SaCheckLogin
-    public Result updateStudent(@RequestBody Students student) {
+    public Result updateStudent(@RequestBody StudentInfo info) {
+//        构造查询条件
         QueryWrapper<Students> wrapper = new QueryWrapper<Students>()
-                .eq("student_unique_id", student.getStudentUniqueId());
-        boolean update = studentsService.update(student, wrapper);
+                .eq("student_unique_id", info.getStudentUniqueId());
+//        构造更新对象
+        Students students = new Students();
+        students.setGender(info.getGender());
+        students.setContactPhone(info.getContactPhone());
+        students.setContactEmail(info.getContactEmail());
+        students.setBirthdate(info.getBirthdate());
+//        执行更新
+        boolean update = studentsService.update(students, wrapper);
         if(update) {
             return Result.success();
         } else {

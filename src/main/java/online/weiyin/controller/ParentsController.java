@@ -4,15 +4,15 @@ import cn.dev33.satoken.annotation.SaCheckLogin;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import online.weiyin.common.Result;
+import online.weiyin.common.ResultCode;
+import online.weiyin.dto.ParentInfo;
 import online.weiyin.entity.Parents;
 import online.weiyin.entity.Students;
+import online.weiyin.entity.Teachers;
 import online.weiyin.service.ParentsService;
 import online.weiyin.service.StudentsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,15 +33,14 @@ public class ParentsController {
     StudentsService studentsService;
 
     /**
-     * 管理功能-查找家长列表(分页)
+     * 管理功能-查找家长列表
      * @return
      */
-    @GetMapping("/getParentsList/{page}")
+    @GetMapping("/getParentsList")
     @SaCheckLogin
-    public Result getParentsList(@PathVariable Integer page) {
-        Page<Parents> pageIns = new Page<>(page, 10);
-        Page<Parents> pageResult = parentsService.page(pageIns);
-        return Result.success(pageResult);
+    public Result getParentsList() {
+        List<Parents> list = parentsService.list();
+        return Result.success(list);
     }
 
     /**
@@ -70,5 +69,28 @@ public class ParentsController {
         List<Students> list = studentsService.list(wrapper);
         return Result.success(list);
     }
-
+    /**
+     * 更新家长的个人信息
+     * @param info
+     * @return
+     */
+    @PostMapping("/updateParent")
+    @SaCheckLogin
+    public Result updateParent(@RequestBody ParentInfo info) {
+//        构造查询条件
+        QueryWrapper<Parents> wrapper = new QueryWrapper<Parents>()
+                .eq("parent_unique_id", info.getParentUniqueId());
+//        构造更新对象
+        Parents parents = new Parents();
+        parents.setGender(info.getGender());
+        parents.setContactPhone(info.getContactPhone());
+        parents.setContactEmail(info.getContactEmail());
+//        执行更新
+        boolean update = parentsService.update(parents, wrapper);
+        if(update) {
+            return Result.success();
+        } else {
+            return Result.fail(ResultCode.UPDATE_ERROR1);
+        }
+    }
 }

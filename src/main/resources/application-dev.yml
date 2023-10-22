@@ -28,3 +28,9 @@ springfox:
   documentation:
     swagger-ui:
       enabled: true
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-field: isDelete
+      logic-delete-value: 1
+      logic-not-delete-value: 0

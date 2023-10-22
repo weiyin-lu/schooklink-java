@@ -16,7 +16,7 @@ import lombok.Data;
 public class RegisterDTO {
     @ApiModelProperty("账号角色")
     private String userType;
-    @ApiModelProperty("业务角度唯一性id")
+    @ApiModelProperty("账号，业务角度唯一性id")
     private String username;
     @ApiModelProperty("姓名")
     private String name;

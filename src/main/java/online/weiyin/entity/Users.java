@@ -41,6 +41,9 @@ public class Users implements Serializable {
     @ApiModelProperty("用户角色编码")
     @TableField("user_type")
     private String userType;
+    @ApiModelProperty("逻辑删除标识")
+    @TableField("is_delete")
+    private Integer isDelete;
 
 
 }
