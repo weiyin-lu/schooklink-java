@@ -15,8 +15,6 @@ import lombok.Data;
 @Data
 @ApiModel(value = "学生常规信息dto", description = "")
 public class StudentInfo {
-    @ApiModelProperty("学号，业务角度唯一性ID")
-    private String studentUniqueId;
 
     @ApiModelProperty("学生生日")
     private String birthdate;

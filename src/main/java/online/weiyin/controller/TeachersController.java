@@ -1,6 +1,7 @@
 package online.weiyin.controller;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
+import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import online.weiyin.common.Result;
@@ -29,7 +30,7 @@ public class TeachersController {
     TeachersService teachersService;
 
     /**
-     * 管理功能-教师列表(分页)
+     * 管理功能-教师列表
      * @return
      */
     @GetMapping("/getTeachersList")
@@ -63,7 +64,7 @@ public class TeachersController {
     public Result updateTeacher(@RequestBody TeacherInfo info) {
 //        构造查询条件
         QueryWrapper<Teachers> wrapper = new QueryWrapper<Teachers>()
-                .eq("teacher_unique_id", info.getTeacherUniqueId());
+                .eq("teacher_unique_id", StpUtil.getLoginId());
 //        构造更新对象
         Teachers teachers = new Teachers();
         teachers.setGender(info.getGender());

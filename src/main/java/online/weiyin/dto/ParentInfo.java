@@ -15,8 +15,6 @@ import lombok.Data;
 @Data
 @ApiModel(value = "家长常规信息dto", description = "")
 public class ParentInfo {
-    @ApiModelProperty("家长编号，业务角度唯一性ID")
-    private String parentUniqueId;
 
     @ApiModelProperty("家长性别")
     private String gender;

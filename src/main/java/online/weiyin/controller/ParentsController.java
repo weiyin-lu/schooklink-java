@@ -1,6 +1,7 @@
 package online.weiyin.controller;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
+import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import online.weiyin.common.Result;
@@ -79,7 +80,7 @@ public class ParentsController {
     public Result updateParent(@RequestBody ParentInfo info) {
 //        构造查询条件
         QueryWrapper<Parents> wrapper = new QueryWrapper<Parents>()
-                .eq("parent_unique_id", info.getParentUniqueId());
+                .eq("parent_unique_id", StpUtil.getLoginId());
 //        构造更新对象
         Parents parents = new Parents();
         parents.setGender(info.getGender());

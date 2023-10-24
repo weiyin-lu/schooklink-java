@@ -2,6 +2,7 @@ package online.weiyin.controller;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.Update;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import online.weiyin.common.Result;
 import online.weiyin.common.ResultCode;
@@ -42,11 +43,43 @@ public class AdminController {
     StudentsService studentsService;
 
     /**
-     * 为学生添加班级
+     * 为学生添加或更新班级
+     * @param id
+     * @param grade
      * @return
      */
-    public Result addGrade() {
-        return Result.fail(ResultCode.NOT_FOUND);
+    @GetMapping("/addGradeForStudent/{id}/{grade}")
+    @SaCheckLogin
+    public Result addGradeForstudent(@PathVariable String id,@PathVariable String grade) {
+        UpdateWrapper<Students> wrapper = new UpdateWrapper<Students>()
+                .set("grade",grade)
+                .eq("student_unique_id", id);
+        boolean update = studentsService.update(wrapper);
+        if(update) {
+            return Result.success();
+        } else {
+            return Result.fail(ResultCode.UPDATE_ERROR1);
+        }
+    }
+
+    /**
+     * 为教师添加班级（分配班主任）
+     * @param id
+     * @param grade
+     * @return
+     */
+    @GetMapping("/addGradeForTeacher/{id}/{grade}")
+    @SaCheckLogin
+    public Result addGradeForTeacher(@PathVariable String id,@PathVariable String grade) {
+        UpdateWrapper<Teachers> wrapper = new UpdateWrapper<Teachers>()
+                .set("grade",grade)
+                .eq("teacher_unique_id", id);
+        boolean update = teachersService.update(wrapper);
+        if(update) {
+            return Result.success();
+        } else {
+            return Result.fail(ResultCode.UPDATE_ERROR1);
+        }
     }
 
     /**

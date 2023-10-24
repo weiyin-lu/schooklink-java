@@ -15,8 +15,6 @@ import lombok.Data;
 @Data
 @ApiModel(value = "教师常规信息dto", description = "")
 public class TeacherInfo {
-    @ApiModelProperty("工号，业务角度唯一性ID")
-    private String teacherUniqueId;
 
     @ApiModelProperty("教师性别编码")
     private String gender;

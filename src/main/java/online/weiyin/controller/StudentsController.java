@@ -1,6 +1,7 @@
 package online.weiyin.controller;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
+import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import online.weiyin.common.Result;
@@ -66,7 +67,7 @@ public class StudentsController {
     public Result updateStudent(@RequestBody StudentInfo info) {
 //        构造查询条件
         QueryWrapper<Students> wrapper = new QueryWrapper<Students>()
-                .eq("student_unique_id", info.getStudentUniqueId());
+                .eq("student_unique_id", StpUtil.getLoginId());
 //        构造更新对象
         Students students = new Students();
         students.setGender(info.getGender());

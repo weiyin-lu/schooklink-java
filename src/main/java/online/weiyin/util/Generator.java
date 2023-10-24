@@ -19,11 +19,12 @@ import java.util.List;
 public class Generator {
     public static void main(String[] args) {
         List<String> tables = new ArrayList<>();
-        tables.add("users");
-        tables.add("students");
-        tables.add("teachers");
-        tables.add("parents");
-        tables.add("dictionary");
+//        tables.add("users");
+//        tables.add("students");
+//        tables.add("teachers");
+//        tables.add("parents");
+//        tables.add("dictionary");
+        tables.add("notices");
 
         FastAutoGenerator.create("jdbc:mysql://localhost:3306/schoollink","root","root")
                 .globalConfig(builder -> {
