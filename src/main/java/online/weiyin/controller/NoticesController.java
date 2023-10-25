@@ -77,16 +77,4 @@ public class NoticesController {
         return Result.success(list);
     }
 
-    /**
-     * 根据视图id修改当前用户的视图
-     * @param id
-     * @return
-     */
-    @GetMapping("/updateNoticeById/{id}")
-    @SaCheckLogin
-    public Result updateNoticeById(@PathVariable Integer id) {
-        return Result.fail(ResultCode.NOT_FOUND);
-    }
-
-
 }
