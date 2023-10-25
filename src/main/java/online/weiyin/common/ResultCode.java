@@ -22,8 +22,9 @@ public enum ResultCode {
     REG_ERROR2(1004, "注册失败，无效角色"),
 //    自定义码-业务相关
     INSERT_ERROR1(2001,"插入失败，请联系系统管理员"),
-    INSERT_ERROR2(2003,"缺少必填字段"),
-    UPDATE_ERROR1(2002,"更新失败，请联系系统管理员"),
+    INSERT_ERROR2(2002,"缺少必填字段"),
+    UPDATE_ERROR1(2003,"更新失败，请联系系统管理员"),
+    UPDATE_ERROR2(2004,"更新失败，无有效数据"),
     ;
 
     private Integer code;

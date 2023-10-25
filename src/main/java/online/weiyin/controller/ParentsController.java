@@ -70,6 +70,7 @@ public class ParentsController {
         List<Students> list = studentsService.list(wrapper);
         return Result.success(list);
     }
+
     /**
      * 更新家长的个人信息
      * @param info
