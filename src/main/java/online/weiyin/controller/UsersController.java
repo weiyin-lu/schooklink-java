@@ -57,7 +57,7 @@ public class UsersController {
             if(one != null) {
 //                框架提供的登录，自动生成token
                 StpUtil.login(loginDTO.getUsername());
-                return Result.success(StpUtil.getTokenValue());
+                return Result.success("登录成功",StpUtil.getTokenInfo());
             }
             else {
                 return Result.fail(ResultCode.LOGIN_ERROR1);
@@ -120,7 +120,7 @@ public class UsersController {
             default:
                 return Result.fail(ResultCode.REG_ERROR2);
         }
-        return Result.success();
+        return Result.success("注册成功");
 
     }
 
@@ -160,7 +160,7 @@ public class UsersController {
     @ResponseBody
     public Result logout() {
         StpUtil.logout();
-        return Result.success();
+        return Result.success("注销成功");
     }
 
     /**
@@ -171,7 +171,7 @@ public class UsersController {
     @ResponseBody
     public Result isLogin() {
         if(StpUtil.isLogin()) {
-            return Result.success();
+            return Result.success("登录状态正常");
         }
         else {
             return Result.fail(ResultCode.LOGIN_ERROR2);

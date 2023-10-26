@@ -35,6 +35,15 @@ public class Result<T> {
         this.msg = "默认成功";
         this.data = data;
     }
+    private Result(String msg) {
+        this.code = 200;
+        this.msg = msg;
+    }
+    private Result(String msg,T data) {
+        this.code = 200;
+        this.msg = msg;
+        this.data = data;
+    }
     private Result(ResultCode resultCode) {
         this.code = resultCode.getCode();
         this.msg = resultCode.getMsg();
@@ -48,6 +57,15 @@ public class Result<T> {
     public static<T> Result<T> success() {
         return new Result<>();
     }
+
+    /**
+     * 返回成功，自定义文本
+     * @return
+     * @param <T>
+     */
+    public static<T> Result<T> success(String msg) {
+        return new Result<>(msg);
+    }
     /**
      * 返回成功，有结果集
      * @param data
@@ -56,6 +74,16 @@ public class Result<T> {
      */
     public static<T> Result<T> success(T data) {
         return new Result<T>(data);
+    }
+    /**
+     * 返回成功，自定义文本，有结果集
+     * @param msg
+     * @param data
+     * @return
+     * @param <T>
+     */
+    public static<T> Result<T> success(String msg,T data) {
+        return new Result<T>(msg, data);
     }
     /**
      * 通用返回失败
