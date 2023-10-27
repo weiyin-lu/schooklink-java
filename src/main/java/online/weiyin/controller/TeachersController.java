@@ -4,6 +4,7 @@ import cn.dev33.satoken.annotation.SaCheckLogin;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.ApiOperation;
 import online.weiyin.common.Result;
 import online.weiyin.common.ResultCode;
 import online.weiyin.dto.TeacherInfo;
@@ -30,9 +31,10 @@ public class TeachersController {
     TeachersService teachersService;
 
     /**
-     * 管理功能-教师列表
+     * 教师列表
      * @return
      */
+    @ApiOperation("教师人员列表")
     @GetMapping("/getTeachersList")
     @SaCheckLogin
     public Result getTeachersList() {
@@ -41,10 +43,11 @@ public class TeachersController {
     }
 
     /**
-     * 管理功能-获取某个id的教师信息
+     * 获取某个id的教师信息
      * @param id 业务角度唯一性id
      * @return
      */
+    @ApiOperation("取某个id的教师信息")
     @GetMapping("/getTeachersByUnique/{id}")
     @SaCheckLogin
     public Result getTeachersByUnique(@PathVariable String id) {
@@ -59,6 +62,7 @@ public class TeachersController {
      * @param info
      * @return
      */
+    @ApiOperation("更新教师的个人信息（性别、联系邮箱、联系电话）")
     @PostMapping("/updateTeacher")
     @SaCheckLogin
     public Result updateTeacher(@RequestBody TeacherInfo info) {
@@ -73,7 +77,7 @@ public class TeachersController {
 //        执行更新
         boolean update = teachersService.update(teachers, wrapper);
         if(update) {
-            return Result.success();
+            return Result.success("更新信息成功");
         } else {
             return Result.fail(ResultCode.UPDATE_ERROR1);
         }

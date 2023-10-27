@@ -4,6 +4,7 @@ import cn.dev33.satoken.annotation.SaCheckLogin;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.Update;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import io.swagger.annotations.ApiOperation;
 import online.weiyin.common.Result;
 import online.weiyin.common.ResultCode;
 import online.weiyin.entity.Parents;
@@ -48,6 +49,7 @@ public class AdminController {
      * @param grade
      * @return
      */
+    @ApiOperation("为学生添加或更新班级")
     @GetMapping("/addGradeForStudent/{id}/{grade}")
     @SaCheckLogin
     public Result addGradeForstudent(@PathVariable String id,@PathVariable String grade) {
@@ -68,6 +70,7 @@ public class AdminController {
      * @param grade
      * @return
      */
+    @ApiOperation("为教师添加班级（分配班主任）")
     @GetMapping("/addGradeForTeacher/{id}/{grade}")
     @SaCheckLogin
     public Result addGradeForTeacher(@PathVariable String id,@PathVariable String grade) {
@@ -87,6 +90,7 @@ public class AdminController {
      * @param id 业务角度唯一性id
      * @return
      */
+    @ApiOperation("根据唯一标识删除教师信息（逻辑删除）")
     @GetMapping("/removeTeacher/{id}")
     @SaCheckLogin
     @Transactional
@@ -109,6 +113,7 @@ public class AdminController {
      * @param id 业务角度唯一性id
      * @return
      */
+    @ApiOperation("删除学生信息（逻辑删除）")
     @GetMapping("/removeStudent/{id}")
     @SaCheckLogin
     @Transactional
@@ -131,6 +136,7 @@ public class AdminController {
      * @param id 业务角度唯一性id
      * @return
      */
+    @ApiOperation("删除家长信息（逻辑删除）")
     @GetMapping("/removeParent/{id}")
     @SaCheckLogin
     @Transactional

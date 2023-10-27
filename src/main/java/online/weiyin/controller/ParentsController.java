@@ -4,6 +4,7 @@ import cn.dev33.satoken.annotation.SaCheckLogin;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.ApiOperation;
 import online.weiyin.common.Result;
 import online.weiyin.common.ResultCode;
 import online.weiyin.dto.ParentInfo;
@@ -34,9 +35,10 @@ public class ParentsController {
     StudentsService studentsService;
 
     /**
-     * 管理功能-查找家长列表
+     * 查找家长列表
      * @return
      */
+    @ApiOperation("查找家长列表")
     @GetMapping("/getParentsList")
     @SaCheckLogin
     public Result getParentsList() {
@@ -49,6 +51,7 @@ public class ParentsController {
      * @param id 业务角度唯一性标识
      * @return
      */
+    @ApiOperation("根据id获取家长信息")
     @GetMapping("/getParentByUnique/{id}")
     @SaCheckLogin
     public Result getParentByUnique(@PathVariable String id) {
@@ -59,9 +62,10 @@ public class ParentsController {
     }
 
     /**
-     * 管理功能-查看家长对应的学生信息
+     * 查看家长对应的学生信息
      * @return
      */
+    @ApiOperation("查看家长对应的学生信息")
     @GetMapping("/getStudentList/{id}")
     @SaCheckLogin
     public Result getStudentsByParent(@PathVariable String id) {
@@ -72,10 +76,11 @@ public class ParentsController {
     }
 
     /**
-     * 更新家长的个人信息
+     * 更新家长的个人信息（性别、邮箱、联系电话）
      * @param info
      * @return
      */
+    @ApiOperation("更新家长的个人信息（性别、邮箱、联系电话）")
     @PostMapping("/updateParent")
     @SaCheckLogin
     public Result updateParent(@RequestBody ParentInfo info) {
@@ -90,7 +95,7 @@ public class ParentsController {
 //        执行更新
         boolean update = parentsService.update(parents, wrapper);
         if(update) {
-            return Result.success();
+            return Result.success("更新信息成功");
         } else {
             return Result.fail(ResultCode.UPDATE_ERROR1);
         }

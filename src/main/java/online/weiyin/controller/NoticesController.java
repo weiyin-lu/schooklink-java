@@ -3,6 +3,7 @@ package online.weiyin.controller;
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import io.swagger.annotations.ApiOperation;
 import online.weiyin.common.Result;
 import online.weiyin.common.ResultCode;
 import online.weiyin.dto.NoticeDTO;
@@ -22,7 +23,7 @@ import java.util.List;
  * @since 2023-10-24
  */
 @RestController
-@RequestMapping("/weiyin/notices")
+@RequestMapping("/schoollink/notices")
 public class NoticesController {
     @Autowired
     NoticesService noticesService;
@@ -32,6 +33,7 @@ public class NoticesController {
      * @param noticeDTO
      * @return
      */
+    @ApiOperation("添加新通知")
     @PostMapping("/createNotice")
     @SaCheckLogin
     public Result createNotice(@RequestBody NoticeDTO noticeDTO) {
@@ -44,7 +46,7 @@ public class NoticesController {
 //        执行插入
         boolean save = noticesService.save(notices);
         if(save) {
-            return Result.success();
+            return Result.success("通知添加成功");
         } else {
             return Result.fail(ResultCode.INSERT_ERROR1);
         }
@@ -54,6 +56,7 @@ public class NoticesController {
      * 根据创建者查询通知列表
      * @return
      */
+    @ApiOperation("根据创建者查询通知列表")
     @GetMapping("/showNoticeListByCreator")
     @SaCheckLogin
     public Result showNoticeListByCreator() {
@@ -68,6 +71,7 @@ public class NoticesController {
      * @param condition
      * @return
      */
+    @ApiOperation("根据指定条件查询通知列表（业务角度唯一性id、班级）")
     @GetMapping("/showNoticeListByCondition/{condition}")
     @SaCheckLogin
     public Result showNoticeListByCondition(@PathVariable String condition) {

@@ -2,6 +2,7 @@ package online.weiyin.controller;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import io.swagger.annotations.ApiOperation;
 import online.weiyin.common.Result;
 import online.weiyin.common.ResultCode;
 import online.weiyin.dto.CodeDTO;
@@ -32,6 +33,7 @@ public class DictionaryController {
      * 获取特定编码下的码表键值
      * @return key-value键值对列表
      */
+    @ApiOperation("获取特定编码下的码表键值")
     @GetMapping("/getCode/{dicType}")
     @SaCheckLogin
     public Result getCode(@PathVariable("dicType") String dicType) {
@@ -51,6 +53,7 @@ public class DictionaryController {
      * @param codeDTO 码表type、key、value
      * @return 成功或失败信息（受全局异常拦截控制）
      */
+    @ApiOperation("特定码表插入新值")
     @PostMapping("/addCode")
     @SaCheckLogin
     public Result addCode(@RequestBody CodeDTO codeDTO) {
@@ -62,7 +65,7 @@ public class DictionaryController {
 //        执行插入
         boolean save = dictionaryService.save(dictionary);
         if(save) {
-            return Result.success();
+            return Result.success("添加成功");
         } else {
             return Result.fail(ResultCode.INSERT_ERROR1);
         }
@@ -73,6 +76,7 @@ public class DictionaryController {
      * @param codeDTO
      * @return
      */
+    @ApiOperation("更新码表，更新条件为type和key")
     @PostMapping("/updateCode")
     @SaCheckLogin
     public Result UpdateCode(@RequestBody CodeDTO codeDTO) {
@@ -88,7 +92,7 @@ public class DictionaryController {
 //        执行插入，检查插入结果
         boolean update = dictionaryService.update(dictionary, wrapper);
         if(update) {
-            return Result.success();
+            return Result.success("修改编码成功");
         } else {
             return Result.fail(ResultCode.UPDATE_ERROR1);
         }
