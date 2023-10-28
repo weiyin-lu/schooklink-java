@@ -52,7 +52,7 @@ public class StudentsController {
      * @return
      */
     @ApiOperation("获取某个id的学生信息")
-    @GetMapping("/getTeachersByUnique/{id}")
+    @GetMapping("/getStudentsByUnique/{id}")
     @SaCheckLogin
     public Result getStudentsByUnique(@PathVariable String id) {
         QueryWrapper<Students> wrapper = new QueryWrapper<Students>()
@@ -89,17 +89,17 @@ public class StudentsController {
     }
 
     /**
-     * 为学生分配班级
+     * 为学生分配家长
      * @param id
-     * @param grade
+     * @param parent
      * @return
      */
-    @ApiOperation("为学生分配班级")
-    @GetMapping("/setGrade/{id}/{grade}")
+    @ApiOperation("为学生分配家长")
+    @GetMapping("/setParent/{id}/{parent}")
     @SaCheckLogin
-    public Result setGrade(@PathVariable String id, @PathVariable String grade) {
+    public Result setParent(@PathVariable String id, @PathVariable String parent) {
         UpdateWrapper<Students> wrapper = new UpdateWrapper<Students>()
-                .set("grade", grade)
+                .set("parent", parent)
                 .eq("student_unique_id", id);
         boolean update = studentsService.update(wrapper);
         if(update) {
