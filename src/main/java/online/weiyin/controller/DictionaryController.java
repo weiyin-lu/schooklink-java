@@ -11,6 +11,7 @@ import online.weiyin.service.DictionaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -46,6 +47,24 @@ public class DictionaryController {
             map.put(dicTemp.getDicKey(), dicTemp.getDicValue());
         }
         return Result.success(map);
+    }
+
+    /**
+     * 获取字典的所有键名
+     * @return
+     */
+    @ApiOperation("获取字典的所有键名")
+    @GetMapping("/getKey")
+    @SaCheckLogin
+    public Result getKeyList() {
+        QueryWrapper<Dictionary> wrapper = new QueryWrapper<Dictionary>()
+                .select("distinct dic_type");
+        List<Dictionary> list = dictionaryService.list(wrapper);
+        List<String> result = new ArrayList<>();
+        for(Dictionary s : list) {
+            result.add(s.getDicType());
+        }
+        return Result.success(result);
     }
 
     /**

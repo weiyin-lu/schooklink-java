@@ -33,6 +33,18 @@ public class StudentsController {
     StudentsService studentsService;
 
     /**
+     * 查找所有學生列表
+     * @return
+     */
+    @ApiOperation("查找所有學生列表")
+    @GetMapping("/getStudentsList")
+    @SaCheckLogin
+    public Result getStudentsList() {
+        List<Students> list = studentsService.list();
+        return Result.success(list);
+    }
+
+    /**
      * 按照班级查找学生列表
      * @return
      */
