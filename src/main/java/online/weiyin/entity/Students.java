@@ -28,15 +28,15 @@ public class Students implements Serializable {
 
     @ApiModelProperty("数据角度唯一性ID")
     @TableId(value = "student_id", type = IdType.AUTO)
-    private Integer studentId;
+    private Integer id;
 
     @ApiModelProperty("学号，业务角度唯一性ID")
     @TableField("student_unique_id")
-    private String studentUniqueId;
+    private String uniqueId;
 
     @ApiModelProperty("学生姓名")
     @TableField("student_name")
-    private String studentName;
+    private String name;
 
     @ApiModelProperty("学生生日")
     @TableField("birthdate")

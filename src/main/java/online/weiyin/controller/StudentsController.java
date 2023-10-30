@@ -4,15 +4,12 @@ import cn.dev33.satoken.annotation.SaCheckLogin;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.ApiOperation;
 import online.weiyin.common.Result;
 import online.weiyin.common.ResultCode;
-import online.weiyin.dto.StudentInfo;
+import online.weiyin.dto.PersonInfo;
 import online.weiyin.entity.Students;
-import online.weiyin.entity.Teachers;
 import online.weiyin.service.StudentsService;
-import online.weiyin.service.TeachersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -81,7 +78,7 @@ public class StudentsController {
     @ApiOperation("更新特定学生的个人信息（生日、邮箱、手机号、性别）")
     @PostMapping("/updateStudent")
     @SaCheckLogin
-    public Result updateStudent(@RequestBody StudentInfo info) {
+    public Result updateStudent(@RequestBody PersonInfo info) {
 //        构造查询条件
         QueryWrapper<Students> wrapper = new QueryWrapper<Students>()
                 .eq("student_unique_id", StpUtil.getLoginId());
@@ -90,7 +87,6 @@ public class StudentsController {
         students.setGender(info.getGender());
         students.setContactPhone(info.getContactPhone());
         students.setContactEmail(info.getContactEmail());
-        students.setBirthdate(info.getBirthdate());
 //        执行更新
         boolean update = studentsService.update(students, wrapper);
         if(update) {

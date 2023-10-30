@@ -28,15 +28,15 @@ public class Teachers implements Serializable {
 
     @ApiModelProperty("数据角度唯一性ID")
     @TableId(value = "teacher_id", type = IdType.AUTO)
-    private Integer teacherId;
+    private Integer id;
 
     @ApiModelProperty("工号，业务角度唯一性ID")
     @TableField("teacher_unique_id")
-    private String teacherUniqueId;
+    private String uniqueId;
 
     @ApiModelProperty("教师姓名")
     @TableField("teacher_name")
-    private String teacherName;
+    private String name;
 
     @ApiModelProperty("教师性别编码")
     @TableField("gender")

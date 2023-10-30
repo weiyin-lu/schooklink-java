@@ -3,14 +3,12 @@ package online.weiyin.controller;
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.ApiOperation;
 import online.weiyin.common.Result;
 import online.weiyin.common.ResultCode;
-import online.weiyin.dto.ParentInfo;
+import online.weiyin.dto.PersonInfo;
 import online.weiyin.entity.Parents;
 import online.weiyin.entity.Students;
-import online.weiyin.entity.Teachers;
 import online.weiyin.service.ParentsService;
 import online.weiyin.service.StudentsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,7 +81,7 @@ public class ParentsController {
     @ApiOperation("更新家长的个人信息（性别、邮箱、联系电话）")
     @PostMapping("/updateParent")
     @SaCheckLogin
-    public Result updateParent(@RequestBody ParentInfo info) {
+    public Result updateParent(@RequestBody PersonInfo info) {
 //        构造查询条件
         QueryWrapper<Parents> wrapper = new QueryWrapper<Parents>()
                 .eq("parent_unique_id", StpUtil.getLoginId());

@@ -28,16 +28,15 @@ public class Parents implements Serializable {
 
     @ApiModelProperty("数据角度唯一性ID")
     @TableId(value = "parents_id", type = IdType.AUTO)
-    private Integer parentsId;
+    private Integer id;
 
     @ApiModelProperty("家长编号，业务角度唯一性ID")
     @TableField("parent_unique_id")
-    private String parentUniqueId;
+    private String uniqueId;
 
     @ApiModelProperty("家长姓名")
     @TableField("parent_name")
-    private String parentName;
-
+    private String name;
     @ApiModelProperty("家长性别")
     @TableField("gender")
     private String gender;

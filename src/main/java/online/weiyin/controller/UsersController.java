@@ -88,8 +88,8 @@ public class UsersController {
         switch(registerDTO.getUserType()) {
             case "1":
                 Teachers teachers = new Teachers();
-                teachers.setTeacherUniqueId(registerDTO.getUsername());
-                teachers.setTeacherName(registerDTO.getName());
+                teachers.setUniqueId(registerDTO.getUsername());
+                teachers.setName(registerDTO.getName());
                 teachers.setContactPhone(registerDTO.getPhone());
 //                默认值，参考码表
                 teachers.setGender("3");
@@ -100,8 +100,8 @@ public class UsersController {
                 break;
             case "2":
                 Parents parents = new Parents();
-                parents.setParentUniqueId(registerDTO.getUsername());
-                parents.setParentName(registerDTO.getName());
+                parents.setUniqueId(registerDTO.getUsername());
+                parents.setName(registerDTO.getName());
                 parents.setContactPhone(registerDTO.getPhone());
 //                默认值，参考码表
                 parents.setGender("3");
@@ -111,8 +111,8 @@ public class UsersController {
                 break;
             case "3":
                 Students students = new Students();
-                students.setStudentUniqueId(registerDTO.getUsername());
-                students.setStudentName(registerDTO.getName());
+                students.setUniqueId(registerDTO.getUsername());
+                students.setName(registerDTO.getName());
 //                默认值，参考码表
                 students.setGender("3");
                 students.setGrade("000000");
@@ -154,6 +154,15 @@ public class UsersController {
                     return Result.success(studentsService.getOne(wrapper3));
                 default: return Result.fail(ResultCode.LOGIN_ERROR2);
             }
+    }
+
+    @ApiOperation("获取当前角色身份id")
+    @SaCheckLogin
+    @GetMapping("/getType")
+    public Result getType() {
+        List<String> roleList = StpUtil.getRoleList();
+        String s = roleList.get(0);
+        return Result.success(s);
     }
 
     /**
