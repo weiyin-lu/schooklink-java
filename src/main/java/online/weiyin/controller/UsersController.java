@@ -62,7 +62,7 @@ public class UsersController {
                 return Result.success("登录成功",StpUtil.getTokenInfo());
             }
             else {
-                return Result.fail(ResultCode.LOGIN_ERROR1);
+                return Result.fail(ResultCode.CHECK_ERROR1);
             }
     }
 
@@ -121,7 +121,7 @@ public class UsersController {
                 studentsService.save(students);
                 break;
             default:
-                return Result.fail(ResultCode.REG_ERROR2);
+                return Result.fail(ResultCode.CHECK_ERROR4);
         }
         return Result.success("注册成功");
 
@@ -146,23 +146,22 @@ public class UsersController {
                     return Result.success(teachersService.getOne(wrapper1));
                 case "2" :
                     QueryWrapper<Parents> wrapper2 = new QueryWrapper<Parents>()
-                            .eq("parents_unique_id",StpUtil.getLoginId());
+                            .eq("parent_unique_id",StpUtil.getLoginId());
                     return Result.success(parentsService.getOne(wrapper2));
                 case "3" :
                     QueryWrapper<Students> wrapper3 = new QueryWrapper<Students>()
-                            .eq("students_unique_id",StpUtil.getLoginId());
+                            .eq("student_unique_id",StpUtil.getLoginId());
                     return Result.success(studentsService.getOne(wrapper3));
-                default: return Result.fail(ResultCode.LOGIN_ERROR2);
+                default: return Result.fail(ResultCode.CHECK_ERROR2);
             }
     }
 
     @ApiOperation("获取当前角色身份id")
     @SaCheckLogin
-    @GetMapping("/getType")
-    public Result getType() {
+    @GetMapping("/getRole")
+    public Result getRole() {
         List<String> roleList = StpUtil.getRoleList();
-        String s = roleList.get(0);
-        return Result.success(s);
+        return Result.success(roleList);
     }
 
     /**
@@ -187,7 +186,7 @@ public class UsersController {
             return Result.success("登录状态正常");
         }
         else {
-            return Result.fail(ResultCode.LOGIN_ERROR2);
+            return Result.fail(ResultCode.CHECK_ERROR2);
         }
     }
 }

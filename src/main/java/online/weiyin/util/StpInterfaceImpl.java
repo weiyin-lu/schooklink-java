@@ -30,6 +30,7 @@ public class StpInterfaceImpl implements StpInterface {
 
     /**
      * 角色查询
+     *
      * @param loginId 当前登录用户的账号（业务角度唯一性ID）
      * @param s
      * @return 当前用户的角色
@@ -38,7 +39,7 @@ public class StpInterfaceImpl implements StpInterface {
     public List<String> getRoleList(Object loginId, String s) {
 //        查询当前用户的角色标识，该标识必然只有一个
         QueryWrapper<Users> usersQueryWrapper = new QueryWrapper<Users>()
-                .eq("username",loginId);
+                .eq("username", loginId);
         Users one = usersService.getOne(usersQueryWrapper);
 //        插入到一个list里（该方法必须返回list）
         ArrayList<String> list = new ArrayList<>();
