@@ -1,6 +1,8 @@
 package online.weiyin.controller;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
+import cn.dev33.satoken.annotation.SaCheckRole;
+import cn.dev33.satoken.annotation.SaMode;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.ApiOperation;
@@ -23,6 +25,7 @@ import java.util.List;
  * @since 2023-10-14
  */
 @RestController
+@SaCheckLogin
 @RequestMapping("/schoollink/teachers")
 public class TeachersController {
 
@@ -34,8 +37,8 @@ public class TeachersController {
      * @return
      */
     @ApiOperation("教师人员列表")
+    @SaCheckRole("admin")
     @GetMapping("/getTeachersList")
-    @SaCheckLogin
     public Result getTeachersList() {
         List<Teachers> list = teachersService.list();
         return Result.success(list);
@@ -48,7 +51,6 @@ public class TeachersController {
      */
     @ApiOperation("取某个id的教师信息")
     @GetMapping("/getTeachersByUnique/{id}")
-    @SaCheckLogin
     public Result getTeachersByUnique(@PathVariable String id) {
         QueryWrapper<Teachers> wrapper = new QueryWrapper<Teachers>()
                 .eq("teacher_unique_id", id);
@@ -62,8 +64,8 @@ public class TeachersController {
      * @return
      */
     @ApiOperation("更新教师的个人信息（性别、联系邮箱、联系电话）")
+    @SaCheckRole(value = {"admin", "1"}, mode = SaMode.OR)
     @PostMapping("/updateTeacher")
-    @SaCheckLogin
     public Result updateTeacher(@RequestBody PersonInfo info) {
 //        构造查询条件
         QueryWrapper<Teachers> wrapper = new QueryWrapper<Teachers>()

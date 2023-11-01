@@ -1,11 +1,16 @@
 package online.weiyin.config;
 
 import cn.dev33.satoken.interceptor.SaInterceptor;
+import cn.dev33.satoken.router.SaRouter;
+import cn.dev33.satoken.stp.StpUtil;
 import online.weiyin.interceptor.CORSInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @ClassName WebMvcConfig
@@ -17,7 +22,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
-//    装配拦截器bean
+    //    装配拦截器bean
     @Bean
     CORSInterceptor getCorsIntercepter() {
         return new CORSInterceptor();
@@ -27,7 +32,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
 //        CORS拦截器，对所有路径生效
         registry.addInterceptor(getCorsIntercepter()).addPathPatterns("/**");
-//        ST-token拦截器，注解鉴权
+//        ST-token拦截器，注解鉴权、路由拦截
         registry.addInterceptor(new SaInterceptor()).addPathPatterns("/**");
     }
 }

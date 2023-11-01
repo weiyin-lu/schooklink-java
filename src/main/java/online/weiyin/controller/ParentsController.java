@@ -1,6 +1,8 @@
 package online.weiyin.controller;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
+import cn.dev33.satoken.annotation.SaCheckRole;
+import cn.dev33.satoken.annotation.SaMode;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.ApiOperation;
@@ -18,7 +20,7 @@ import java.util.List;
 
 /**
  * <p>
- *  家长管理
+ * 家长管理
  * </p>
  *
  * @author 卢子昂
@@ -34,11 +36,12 @@ public class ParentsController {
 
     /**
      * 查找家长列表
+     *
      * @return
      */
     @ApiOperation("查找家长列表")
+    @SaCheckRole("admin")
     @GetMapping("/getParentsList")
-    @SaCheckLogin
     public Result getParentsList() {
         List<Parents> list = parentsService.list();
         return Result.success(list);
@@ -46,26 +49,27 @@ public class ParentsController {
 
     /**
      * 根据id获取家长信息
+     *
      * @param id 业务角度唯一性标识
      * @return
      */
     @ApiOperation("根据id获取家长信息")
     @GetMapping("/getParentByUnique/{id}")
-    @SaCheckLogin
     public Result getParentByUnique(@PathVariable String id) {
         QueryWrapper<Parents> wrapper = new QueryWrapper<Parents>()
-                .eq("parent_unique_id",id);
+                .eq("parent_unique_id", id);
         Parents parents = parentsService.getOne(wrapper);
         return Result.success(parents);
     }
 
     /**
      * 查看家长对应的学生信息
+     *
      * @return
      */
     @ApiOperation("查看家长对应的学生信息")
+    @SaCheckRole(value = {"admin", "1", "2"}, mode = SaMode.OR)
     @GetMapping("/getStudentList/{id}")
-    @SaCheckLogin
     public Result getStudentsByParent(@PathVariable String id) {
         QueryWrapper<Students> wrapper = new QueryWrapper<Students>()
                 .eq("parents", id);
@@ -75,12 +79,13 @@ public class ParentsController {
 
     /**
      * 更新家长的个人信息（性别、邮箱、联系电话）
+     *
      * @param info
      * @return
      */
     @ApiOperation("更新家长的个人信息（性别、邮箱、联系电话）")
+    @SaCheckRole(value = {"admin", "2"}, mode = SaMode.OR)
     @PostMapping("/updateParent")
-    @SaCheckLogin
     public Result updateParent(@RequestBody PersonInfo info) {
 //        构造查询条件
         QueryWrapper<Parents> wrapper = new QueryWrapper<Parents>()
@@ -92,7 +97,7 @@ public class ParentsController {
         parents.setContactEmail(info.getContactEmail());
 //        执行更新
         boolean update = parentsService.update(parents, wrapper);
-        if(update) {
+        if (update) {
             return Result.success("更新信息成功");
         } else {
             return Result.fail(ResultCode.UPDATE_ERROR1);

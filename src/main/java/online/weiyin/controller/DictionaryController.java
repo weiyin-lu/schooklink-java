@@ -1,6 +1,7 @@
 package online.weiyin.controller;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
+import cn.dev33.satoken.annotation.SaCheckRole;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.ApiOperation;
 import online.weiyin.common.Result;
@@ -24,6 +25,7 @@ import java.util.List;
  * @since 2023-10-14
  */
 @RestController
+@SaCheckLogin
 @RequestMapping("/schoollink/dictionary")
 public class DictionaryController {
 
@@ -36,7 +38,6 @@ public class DictionaryController {
      */
     @ApiOperation("获取特定编码下的码表键值")
     @GetMapping("/getCode/{dicType}")
-    @SaCheckLogin
     public Result getCode(@PathVariable("dicType") String dicType) {
         QueryWrapper<Dictionary> wrapper = new QueryWrapper<Dictionary>()
                 .eq("dic_type",dicType);
@@ -55,7 +56,6 @@ public class DictionaryController {
      */
     @ApiOperation("获取字典的所有键名")
     @GetMapping("/getKey")
-    @SaCheckLogin
     public Result getKeyList() {
         QueryWrapper<Dictionary> wrapper = new QueryWrapper<Dictionary>()
                 .select("distinct dic_type");
@@ -73,8 +73,8 @@ public class DictionaryController {
      * @return 成功或失败信息（受全局异常拦截控制）
      */
     @ApiOperation("特定码表插入新值")
+    @SaCheckRole("admin")
     @PostMapping("/addCode")
-    @SaCheckLogin
     public Result addCode(@RequestBody CodeDTO codeDTO) {
 //        构造实体类
         Dictionary dictionary = new Dictionary();
@@ -96,8 +96,8 @@ public class DictionaryController {
      * @return
      */
     @ApiOperation("更新码表，更新条件为type和key")
+    @SaCheckRole("admin")
     @PostMapping("/updateCode")
-    @SaCheckLogin
     public Result UpdateCode(@RequestBody CodeDTO codeDTO) {
 //        构造查询条件
         QueryWrapper<Dictionary> wrapper = new QueryWrapper<Dictionary>()

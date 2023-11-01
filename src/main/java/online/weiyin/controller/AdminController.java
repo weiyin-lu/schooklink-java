@@ -1,8 +1,7 @@
 package online.weiyin.controller;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.Update;
+import cn.dev33.satoken.annotation.SaCheckRole;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import io.swagger.annotations.ApiOperation;
 import online.weiyin.common.Result;
@@ -32,6 +31,7 @@ import java.nio.file.Path;
  * @Author 卢子昂
  */
 @RestController
+@SaCheckLogin
 @RequestMapping("/schoollink/admins")
 public class AdminController {
     @Autowired
@@ -50,8 +50,8 @@ public class AdminController {
      * @return
      */
     @ApiOperation("为学生添加或更新班级")
+    @SaCheckRole("admin")
     @GetMapping("/addGradeForStudent/{id}/{grade}")
-    @SaCheckLogin
     public Result addGradeForstudent(@PathVariable String id,@PathVariable String grade) {
         UpdateWrapper<Students> wrapper = new UpdateWrapper<Students>()
                 .set("grade",grade)
@@ -71,8 +71,8 @@ public class AdminController {
      * @return
      */
     @ApiOperation("为教师添加班级（分配班主任）")
+    @SaCheckRole("admin")
     @GetMapping("/addGradeForTeacher/{id}/{grade}")
-    @SaCheckLogin
     public Result addGradeForTeacher(@PathVariable String id,@PathVariable String grade) {
         UpdateWrapper<Teachers> wrapper = new UpdateWrapper<Teachers>()
                 .set("grade",grade)
@@ -91,8 +91,8 @@ public class AdminController {
      * @return
      */
     @ApiOperation("根据唯一标识删除教师信息（逻辑删除）")
+    @SaCheckRole("admin")
     @GetMapping("/removeTeacher/{id}")
-    @SaCheckLogin
     @Transactional
     public Result removeTeacher(@PathVariable String id) {
 //        构造更新条件和字段
@@ -114,8 +114,8 @@ public class AdminController {
      * @return
      */
     @ApiOperation("删除学生信息（逻辑删除）")
+    @SaCheckRole("admin")
     @GetMapping("/removeStudent/{id}")
-    @SaCheckLogin
     @Transactional
     public Result removeStudent(@PathVariable String id) {
 //        构造更新条件和字段
@@ -137,8 +137,8 @@ public class AdminController {
      * @return
      */
     @ApiOperation("删除家长信息（逻辑删除）")
+    @SaCheckRole("admin")
     @GetMapping("/removeParent/{id}")
-    @SaCheckLogin
     @Transactional
     public Result removeParent(@PathVariable String id) {
 //        构造更新条件和字段

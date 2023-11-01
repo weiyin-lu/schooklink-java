@@ -1,6 +1,7 @@
 package online.weiyin.controller;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
+import cn.dev33.satoken.annotation.SaIgnore;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.ApiOperation;
@@ -31,6 +32,7 @@ import java.util.List;
  * @since 2023-10-14
  */
 @RestController
+@SaCheckLogin
 @RequestMapping("/schoollink/users")
 public class UsersController {
 
@@ -49,6 +51,7 @@ public class UsersController {
      * @return 当前用户的token，该值也会被框架自动注入到Cookie中（仅登录成功）
      */
     @ApiOperation("用户登录")
+    @SaIgnore
     @PostMapping("/login")
     public Result login(@RequestBody LoginDTO loginDTO) {
         QueryWrapper<Users> wrapper = new QueryWrapper<Users>()
@@ -72,6 +75,7 @@ public class UsersController {
      * @return 注册成功或失败信息（受全局异常拦截控制）
      */
     @ApiOperation("注册")
+    @SaIgnore
     @PostMapping("/register")
     @Transactional
     public Result register(@RequestBody RegisterDTO registerDTO) {
@@ -132,7 +136,6 @@ public class UsersController {
      * @return 用户信息（受全局异常拦截控制）
      */
     @ApiOperation("根据角色获得当前用户的信息")
-    @SaCheckLogin
     @GetMapping("/getInfo")
     public Result getInfo() {
 //        通过登录信息获得角色身份，必须在登录后才能操作，可以规避列表为空的问题
@@ -157,7 +160,6 @@ public class UsersController {
     }
 
     @ApiOperation("获取当前角色身份id")
-    @SaCheckLogin
     @GetMapping("/getRole")
     public Result getRole() {
         List<String> roleList = StpUtil.getRoleList();
@@ -169,6 +171,7 @@ public class UsersController {
      * @return
      */
     @ApiOperation("登出")
+    @SaIgnore
     @GetMapping("/logout")
     public Result logout() {
         StpUtil.logout();
@@ -180,6 +183,7 @@ public class UsersController {
      * @return
      */
     @ApiOperation("检查登录状态")
+    @SaIgnore
     @GetMapping("/isLogin")
     public Result isLogin() {
         if(StpUtil.isLogin()) {
