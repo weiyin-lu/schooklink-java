@@ -37,7 +37,7 @@ public class StudentsController {
      *
      * @return
      */
-    @ApiOperation("查找所有學生列表")
+    @ApiOperation("查找所有学生列表")
     @SaCheckRole("admin")
     @GetMapping("/getStudentsList")
     public Result getStudentsList() {
@@ -113,11 +113,11 @@ public class StudentsController {
     @GetMapping("/setParent/{id}/{parent}")
     public Result setParent(@PathVariable String id, @PathVariable String parent) {
         UpdateWrapper<Students> wrapper = new UpdateWrapper<Students>()
-                .set("parent", parent)
+                .set("parents", parent)
                 .eq("student_unique_id", id);
         boolean update = studentsService.update(wrapper);
         if (update) {
-            return Result.success("更新班级成功");
+            return Result.success("分配家长成功");
         } else {
             return Result.fail(ResultCode.UPDATE_ERROR1);
         }

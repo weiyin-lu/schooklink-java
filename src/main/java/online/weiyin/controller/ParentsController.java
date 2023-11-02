@@ -27,6 +27,7 @@ import java.util.List;
  * @since 2023-10-14
  */
 @RestController
+@SaCheckLogin
 @RequestMapping("/schoollink/parents")
 public class ParentsController {
     @Autowired
@@ -40,7 +41,7 @@ public class ParentsController {
      * @return
      */
     @ApiOperation("查找家长列表")
-    @SaCheckRole("admin")
+    @SaCheckRole(value = {"admin", "1"}, mode = SaMode.OR)
     @GetMapping("/getParentsList")
     public Result getParentsList() {
         List<Parents> list = parentsService.list();
