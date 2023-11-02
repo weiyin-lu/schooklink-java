@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -155,6 +156,11 @@ public class UsersController {
                     QueryWrapper<Students> wrapper3 = new QueryWrapper<Students>()
                             .eq("student_unique_id",StpUtil.getLoginId());
                     return Result.success(studentsService.getOne(wrapper3));
+                case "admin": // 固定系统管理员信息
+                    HashMap<String, String> map = new HashMap<>();
+                    map.put("uniqueId","admin");
+                    map.put("name","系统管理员");
+                    return Result.success(map);
                 default: return Result.fail(ResultCode.CHECK_ERROR2);
             }
     }
