@@ -38,10 +38,6 @@ public class Students implements Serializable {
     @TableField("student_name")
     private String name;
 
-    @ApiModelProperty("学生生日")
-    @TableField("birthdate")
-    private String birthdate;
-
     @ApiModelProperty("学生邮箱")
     @TableField("contact_email")
     private String contactEmail;
