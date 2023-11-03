@@ -76,7 +76,6 @@ public class UsersController {
      * @return 注册成功或失败信息（受全局异常拦截控制）
      */
     @ApiOperation("注册")
-    @SaIgnore
     @PostMapping("/register")
     @Transactional
     public Result register(@RequestBody RegisterDTO registerDTO) {

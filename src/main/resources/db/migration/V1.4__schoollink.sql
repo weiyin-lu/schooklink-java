@@ -70,7 +70,7 @@ CREATE TABLE `flyway_schema_history` (
 
 LOCK TABLES `flyway_schema_history` WRITE;
 /*!40000 ALTER TABLE `flyway_schema_history` DISABLE KEYS */;
-INSERT INTO `flyway_schema_history` VALUES (1,'1.0','schoollink','SQL','V1_0__schoollink.sql',845334615,'root','2023-10-15 04:44:46',2539,1),(2,'1.1','schoollink','SQL','V1.1__schoollink.sql',1059819363,'root','2023-10-15 05:35:19',1887,1),(3,'1.2','schoollink','SQL','V1.2__schoollink.sql',1460170174,'root','2023-10-15 08:30:16',2732,1),(4,'1.3','schoollink','SQL','V1.3__schoollink.sql',60272491,'root','2023-10-22 12:05:22',2991,1);
+INSERT INTO `flyway_schema_history` VALUES (1,'1.0','schoollink','SQL','V1_0__schoollink.sql',845334615,'root','2023-10-15 04:44:46',2539,1),(2,'1.1','schoollink','SQL','V1.1__schoollink.sql',1059819363,'root','2023-10-15 05:35:19',1887,1),(3,'1.2','schoollink','SQL','V1.2__schoollink.sql',1460170174,'root','2023-10-15 08:30:16',2732,1),(4,'1.3','schoollink','SQL','V1.3__schoollink.sql',60272491,'root','2023-10-22 12:05:22',2991,1),(5,'1.4','schoollink','SQL','V1.4__schoollink.sql',-2025364686,'root','2023-11-03 06:43:59',3057,1);
 /*!40000 ALTER TABLE `flyway_schema_history` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -143,7 +143,6 @@ CREATE TABLE `students` (
   `student_id` int NOT NULL AUTO_INCREMENT COMMENT '数据角度唯一性ID',
   `student_unique_id` varchar(32) NOT NULL COMMENT '学号，业务角度唯一性ID',
   `student_name` varchar(100) NOT NULL COMMENT '学生姓名',
-  `birthdate` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '学生生日',
   `contact_email` varchar(100) DEFAULT NULL COMMENT '学生邮箱',
   `contact_phone` varchar(15) DEFAULT NULL COMMENT '学生手机号',
   `gender` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '学生性别编码',
@@ -152,7 +151,7 @@ CREATE TABLE `students` (
   `is_delete` int NOT NULL DEFAULT '0' COMMENT '逻辑删除标识',
   PRIMARY KEY (`student_id`),
   UNIQUE KEY `students_un` (`student_unique_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -161,7 +160,7 @@ CREATE TABLE `students` (
 
 LOCK TABLES `students` WRITE;
 /*!40000 ALTER TABLE `students` DISABLE KEYS */;
-INSERT INTO `students` VALUES (1,'XS000001','张大虎','20170401',NULL,NULL,'1','JZ000001','202301',0),(2,'XS000002','张小虎','20170106',NULL,NULL,'1','JZ000001','202301',0),(3,'XS000003','王花花','20180307',NULL,NULL,'2','JZ010102','202302',0),(4,'XS000004','李四','20170806',NULL,NULL,'1','JZ010105','202303',0),(5,'XS000005','方正','20170904',NULL,NULL,'2','JZ010105','202304',0),(6,'XS000006','福华','20170515',NULL,NULL,'1','JZ010104','202305',0),(7,'XS000007','公孙刘洪','20160703',NULL,NULL,'1','JZ010102','202301',0),(8,'XS000008','测试用户1','20200415',NULL,NULL,'3','JZ010103','202301',0),(9,'XS000009','测试用户2',NULL,NULL,NULL,'3','JZ000001','202301',0);
+INSERT INTO `students` VALUES (1,'XS000001','张大虎',NULL,NULL,'1','JZ000001','202301',0),(2,'XS000002','张小虎',NULL,NULL,'1','JZ000001','202301',0),(3,'XS000003','王花花',NULL,NULL,'2','JZ010102','202302',0),(4,'XS000004','李四',NULL,NULL,'1','JZ010105','202303',0),(5,'XS000005','方正',NULL,NULL,'2','JZ010105','202304',0),(6,'XS000006','福华',NULL,NULL,'1','JZ010104','202305',0),(7,'XS000007','公孙刘洪',NULL,NULL,'1','JZ010102','202301',0),(8,'XS000008','测试用户1',NULL,NULL,'3','JZ010103','202301',0),(9,'XS000009','测试用户2',NULL,NULL,'3','JZ000001','202301',0);
 /*!40000 ALTER TABLE `students` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -211,7 +210,7 @@ CREATE TABLE `users` (
   `is_delete` int NOT NULL DEFAULT '0' COMMENT '逻辑删除标识',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `users_un` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -237,4 +236,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-03 11:14:33
+-- Dump completed on 2023-11-03 15:58:19
