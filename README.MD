@@ -1,6 +1,6 @@
 # SchoolLink学校管理系统
 基于springboot的简易学生管理系统  
-[vue前端仓库地址](https://gitee.com/weiyin2002/schoollink-front)
+[vue前端仓库地址](https://github.com/weiyin-lu/schoollink-front)
 ## 技术栈和版本
 ### 主要技术栈
 主要技术栈和对应版本如下：  
